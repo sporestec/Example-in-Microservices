@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "AddUser";
+}
+@model UserProfileApp.ViewModels.UserViewModel
+
+<div class="container">
+    <h2>Mikroservis Örneği</h2>
+    <p>Kullanıcı bilgileri MS1'den, fotolar ise MS2'den gelmektedir.</p>
+    <form asp-controller="Home" asp-action="Create">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Ad</label>
+            <input type="email" class="form-control" id="Name" placeholder="Enter email"  asp-for="Name">
+        </div>
+        <div class="form-group" >
+            <label for="exampleInputEmail1">Email</label>
+            <input type="email" class="form-control" id="Email" placeholder="Enter email"  asp-for="Email">
+        </div>
+        <div class="form-group"  >
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="Password" placeholder="Password" asp-for="Password">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlFile1">Example file input</label>
+            <input type="file" class="form-control-file" id="Path" asp-for="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

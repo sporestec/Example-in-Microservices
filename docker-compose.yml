@@ -1,0 +1,44 @@
+version: '3.4'
+
+services:
+
+  sql.data:
+    image: microsoft/mssql-server-linux:2017-latest
+
+  numberone.api:
+    image: ${DOCKER_REGISTRY}numberoneapi
+    build:
+      context: .
+      dockerfile: src/Services/MicroServiceNumberOne/NumberOne.API/Dockerfile
+      
+    depends_on:
+      - sql.data
+
+
+  numbertwo.api:
+    image: ${DOCKER_REGISTRY}numbertwoapi
+    build:
+      context: .
+      dockerfile: src/Services/MicroServiceNumberTwo/NumberTwo.API/Dockerfile
+    depends_on:
+      - sql.data
+
+  webstatus:
+    image: ${DOCKER_REGISTRY}webstatus
+    build:
+      context: .
+      dockerfile: src/Web/WebStatus/Dockerfile
+
+  userprofileapp:
+    image: ${DOCKER_REGISTRY}userprofileapp
+    build:
+      context: .
+      dockerfile: src/Web/UserProfileApp/Dockerfile
+
+
+  web.bff:
+    image: ${DOCKER_REGISTRY}webbff
+    build:
+      context: .
+      dockerfile: src/ApiGateways/Web.BFF/Dockerfile
+
