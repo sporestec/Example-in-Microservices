@@ -21,12 +21,12 @@ namespace Web.BFF.Services
             _urls = config.Value;
         }
 
-        public Task<UsersImages> AddUserImage(UsersImages userImage)
+        public Task<UserImage> AddUserImage(UserImage userImage)
         {
             throw new NotImplementedException();
         }
 
-        public Task<UsersImages> GetAll()
+        public Task<UserImage> GetAll()
         {
             throw new NotImplementedException();
         }

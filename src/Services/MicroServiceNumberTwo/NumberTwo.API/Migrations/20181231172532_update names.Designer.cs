@@ -9,8 +9,8 @@ using NumberTwo.API.Models;
 namespace NumberTwo.API.Migrations
 {
     [DbContext(typeof(ImagesContext))]
-    [Migration("20181118200832_aaa")]
-    partial class aaa
+    [Migration("20181231172532_update names")]
+    partial class updatenames
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,17 +20,19 @@ namespace NumberTwo.API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("NumberTwo.API.Models.UsersImages", b =>
+            modelBuilder.Entity("NumberTwo.API.Models.UserImage", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Path");
 
-                    b.HasKey("id");
+                    b.Property<int>("UserId");
 
-                    b.ToTable("Users");
+                    b.HasKey("Id");
+
+                    b.ToTable("UsersImages");
                 });
 #pragma warning restore 612, 618
         }

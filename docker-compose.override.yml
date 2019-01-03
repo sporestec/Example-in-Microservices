@@ -12,27 +12,21 @@ services:
   numberone.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ASPNETCORE_HTTPS_PORT=44316
+      - ASPNETCORE_URLS=http://+:80
       - ConnectionString=Server=sql.data;Database=numberoneDB;User Id=sa;Password=Pass@word
     ports:
       - "52523:80"
-      - "44316:443"
     volumes:
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
 
   numbertwo.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ASPNETCORE_HTTPS_PORT=44376
+      - ASPNETCORE_URLS=http://+:80
       - ConnectionString=Server=sql.data;Database=numbertwoDB;User Id=sa;Password=Pass@word
     ports:
       - "52526:80"
-      - "44376:443"
     volumes:
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
 
   webstatus:
@@ -50,22 +44,18 @@ services:
   userprofileapp:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ASPNETCORE_HTTPS_PORT=44345
+      - ASPNETCORE_URLS=http://+:80
     ports:
       - "55747:80"
-      - "44345:443"
     volumes:
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+
   web.bff:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ASPNETCORE_HTTPS_PORT=44347
+      - ASPNETCORE_URLS=http://+:80
     ports:
       - "57155:80"
-      - "44347:443"
     volumes:
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro

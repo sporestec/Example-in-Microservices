@@ -2,24 +2,26 @@ version: '3.4'
 
 services:
 
+  reverse-proxy:
+    image: traefik # The official Traefik docker image
+    command: --api --docker # --docker.domain=traefik --docker.watch # Enables the web UI and tells Traefik to listen to docker
+    ports:
+      - "80:80"     # The HTTP port
+      - "8080:8080" # The Web UI (enabled by --api)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      #- ./traefik.toml:/etc/traefik/traefik.toml
+
   sql.data:
     image: microsoft/mssql-server-linux:2017-latest
-
-  numberone.api:
-    image: ${DOCKER_REGISTRY}numberoneapi
-    build:
-      context: .
-      dockerfile: src/Services/MicroServiceNumberOne/NumberOne.API/Dockerfile
-      
-    depends_on:
-      - sql.data
-
 
   numbertwo.api:
     image: ${DOCKER_REGISTRY}numbertwoapi
     build:
       context: .
       dockerfile: src/Services/MicroServiceNumberTwo/NumberTwo.API/Dockerfile
+      labels:
+      - "traefik.frontend.rule=Host:numbertwoapi.docker.localhost"
     depends_on:
       - sql.data
 
@@ -28,13 +30,26 @@ services:
     build:
       context: .
       dockerfile: src/Web/WebStatus/Dockerfile
+      labels:
+      - "traefik.frontend.rule=Host:webstatus.docker.localhost"
+
+  numberone.api:
+    image: ${DOCKER_REGISTRY}numberoneapi
+    build:
+      context: .
+      dockerfile: src/Services/MicroServiceNumberOne/NumberOne.API/Dockerfile
+      labels:
+      - "traefik.frontend.rule=Host:numberoneapi.docker.localhost"
+    depends_on:
+      - sql.data
 
   userprofileapp:
     image: ${DOCKER_REGISTRY}userprofileapp
     build:
       context: .
       dockerfile: src/Web/UserProfileApp/Dockerfile
-
+      labels:
+      - "traefik.frontend.rule=Host:userprofileapp.docker.localhost"
 
   web.bff:
     image: ${DOCKER_REGISTRY}webbff

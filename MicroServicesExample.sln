@@ -47,7 +47,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserProfileApp", "src\Web\U
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways", "{FECC1DB4-0B41-47F2-9817-4FAB89DCB2AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.BFF", "src\ApiGateways\Web.BFF\Web.BFF.csproj", "{D4EC78BD-DAC0-426C-8A65-34BF03FA9BDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.BFF", "src\ApiGateways\Web.BFF\Web.BFF.csproj", "{D4EC78BD-DAC0-426C-8A65-34BF03FA9BDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

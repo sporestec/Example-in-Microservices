@@ -6,10 +6,10 @@
 <div class="container">
     <h2>Mikroservis Örneği</h2>
     <p>Kullanıcı bilgileri MS1'den, fotolar ise MS2'den gelmektedir.</p>
-    <form asp-controller="Home" asp-action="Create">
+    <form asp-controller="Home" asp-action="Create" enctype="multipart/form-data">
         <div class="form-group">
             <label for="exampleInputEmail1">Ad</label>
-            <input type="email" class="form-control" id="Name" placeholder="Enter email"  asp-for="Name">
+            <input type="text" class="form-control" id="Name" placeholder="Enter email"  asp-for="Name">
         </div>
         <div class="form-group" >
             <label for="exampleInputEmail1">Email</label>
@@ -22,7 +22,7 @@
 
         <div class="form-group">
             <label for="exampleFormControlFile1">Example file input</label>
-            <input type="file" class="form-control-file" id="Path" asp-for="Password">
+            <input type="file" class="form-control-file" id="Image" asp-for="Image">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

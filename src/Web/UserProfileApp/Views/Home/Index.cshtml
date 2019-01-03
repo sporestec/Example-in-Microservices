@@ -2,6 +2,8 @@
     ViewData["Title"] = "Home Page";
 }
 
+@model MultiModel
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,30 +34,57 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                    <td><img src="https://sabis.sakarya.edu.tr/Template/img/img_saulogo.png" /></td>
-                </tr>
-                <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>john@example.com</td>
-                    <td><img src="https://sabis.sakarya.edu.tr/Template/img/img_saulogo.png" /></td>
-                </tr>
-                <tr>
-                    <td>john@example.com</td>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td><img src="https://sabis.sakarya.edu.tr/Template/img/img_saulogo.png" /></td>
-                </tr>
+                @if (Model.userData.Count > 0 && Model.usersImages.Count > 0)
+                {
+                    @foreach (var item in Model.userData)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td>@item.Email</td>
+                            @{
+                                var x = Model.usersImages.Where(r => r.UserId == item.Id).FirstOrDefault();
+                            }
+                            <td><img style="max-width:227px;max-height:57px;" src="http://numbertwoapi.docker.localhost/userimage/image?path=@x?.Path.ToString()" /></td>
+                        </tr>
+                    }
+                }
+                else if (Model.userData.Count > 0)
+                {
+                    @foreach (var item in Model.userData)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td>@item.Email</td>
+                            <td>Sunucudan Yanıt Yok</td>
+                        </tr>
+                    }
+                }
+                else if (Model.usersImages.Count > 0)
+                {
+                    @foreach (var item in Model.usersImages)
+                    {
+                        <tr>
+                            <td>@item.UserId</td>
+                            <td>Sunucudan Yanıt Yok</td>
+                            <td>Sunucudan Yanıt Yok</td>
+                            <td><img style="max-width:227px;max-height:57px;" src="http://numbertwoapi.docker.localhost/userimage/image?path=@{item.Path.ToString();} " /></td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td>Sunucudan Yanıt Yok</td>
+                        <td>Sunucudan Yanıt Yok</td>
+                        <td>Sunucudan Yanıt Yok</td>
+                        <td>Sunucudan Yanıt Yok</td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
-
     <a href='@Url.Action("AddUser", "Home")' class="btn btn-success">Kişi Ekle</a>
-
-
 </body>
 </html>

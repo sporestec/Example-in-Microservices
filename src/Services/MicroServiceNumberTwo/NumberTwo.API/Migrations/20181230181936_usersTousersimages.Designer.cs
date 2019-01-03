@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NumberTwo.API.Models;
 
 namespace NumberTwo.API.Migrations
 {
-    [DbContext(typeof(İmagesContext))]
-    partial class İmagesContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ImagesContext))]
+    [Migration("20181230181936_usersTousersimages")]
+    partial class usersTousersimages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,7 +30,7 @@ namespace NumberTwo.API.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Users");
+                    b.ToTable("UsersImages");
                 });
 #pragma warning restore 612, 618
         }

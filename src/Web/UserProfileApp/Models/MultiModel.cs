@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Web.BFF.Services
+namespace UserProfileApp.Models
 {
-    public interface INumberTwo
+    public class MultiModel
     {
-        Task<UserImage> GetAll();
-        Task<UserImage> AddUserImage(UserImage userImage);
+        public List<UserData> userData { get; set; }
+        public List<UserImage> usersImages { get; set; }
     }
 }

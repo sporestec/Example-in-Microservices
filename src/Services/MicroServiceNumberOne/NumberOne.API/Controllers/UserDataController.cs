@@ -9,7 +9,9 @@ using NumberOne.API.Models;
 
 namespace NumberOne.API.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [ApiController]
+    [Route("[controller]")]
+    [Produces("application/json")]
 
     public class UserDataController : Controller
     {
@@ -24,8 +26,32 @@ namespace NumberOne.API.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var items = _userDataContext.Users.ToList();
-            return Ok(items);
+            if (_userDataContext.Users.ToList().Count == 0)
+            {
+                List<UserData> udata = new List<UserData>();
+                udata.Add(new UserData { Email = "ahmet@gmail.com", Name = "Ahmet", Password = "sifre" });
+                udata.Add(new UserData { Email = "tarik@gmail.com", Name = "Tarik", Password = "sifre" });
+                udata.Add(new UserData { Email = "veli@gmail.com", Name = "Veli", Password = "sifre" });
+                udata.Add(new UserData { Email = "ali@gmail.com", Name = "Ali", Password = "sifre" });
+                _userDataContext.Users.AddRange(udata);
+                _userDataContext.SaveChanges();
+            }
+            var usersData = _userDataContext.Users.ToList();
+            return Ok(usersData);
         }
+
+
+        [HttpPost]
+        public IActionResult Post([FromBody] UserData udata)
+        {
+            var userData = _userDataContext.Add(udata).Entity;
+            _userDataContext.SaveChanges();
+            if (userData != null && userData.Id > 0)
+            {
+                return Ok(userData.Id);
+            }
+            return BadRequest();
+        }
+
     }
 }

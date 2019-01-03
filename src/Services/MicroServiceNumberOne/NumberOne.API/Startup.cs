@@ -54,6 +54,12 @@ namespace NumberOne.API
             //Configure logs
 
 
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<UserDataContext>();
+                context.Database.Migrate();
+            }
+
             var pathBase = Configuration["PATH_BASE"];
 
             if (!string.IsNullOrEmpty(pathBase))
